@@ -4,15 +4,14 @@ import { baseUrl } from '../shared/baseUrl';
 
 
 export const fetchCampsites = () => dispatch => {
-
     dispatch(campsitesLoading());
-    
+
     return fetch(baseUrl + 'campsites')
         .then(response => {
                 if (response.ok) {
                     return response;
                 } else {
-                    const error = new Error(`Error ${response.status}: ${response.statusTest}`);
+                    const error = new Error(`Error ${response.status}: ${response.statusText}`);
                     error.response = response;
                     throw error;
                 }
@@ -26,6 +25,7 @@ export const fetchCampsites = () => dispatch => {
         .then(campsites => dispatch(addCampsites(campsites)))
         .catch(error => dispatch(campsitesFailed(error.message)));
 };
+
 
 export const campsitesLoading = () => ({
     type: ActionTypes.CAMPSITES_LOADING
@@ -47,7 +47,7 @@ export const fetchComments = () => dispatch => {
                 if (response.ok) {
                     return response;
                 } else {
-                    const error = new Error(`Error ${response.status}: ${response.statusTest}`);
+                    const error = new Error(`Error ${response.status}: ${response.statusText}`);
                     error.response = response;
                     throw error;
                 }
@@ -113,15 +113,14 @@ export const postComment = (campsiteId, rating, author, text) => dispatch => {
 };
 
 export const fetchPromotions = () => dispatch => {
-
     dispatch(promotionsLoading());
-    
+
     return fetch(baseUrl + 'promotions')
         .then(response => {
                 if (response.ok) {
                     return response;
                 } else {
-                    const error = new Error(`Error ${response.status}: ${response.statusTest}`);
+                    const error = new Error(`Error ${response.status}: ${response.statusText}`);
                     error.response = response;
                     throw error;
                 }
